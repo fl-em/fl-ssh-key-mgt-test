@@ -1,0 +1,8 @@
+#!/bin/bash
+# Add this script to the cloud-init-script
+
+# Downloads the bash script for 'support' user and saves it to /root
+curl https://raw.githubusercontent.com/fl-em/fl-ssh-key-mgt-test/refs/heads/main/init-support-user.sh -o /root/init-support-user.sh
+chmod +x /root/init-support-user.sh # Make the script executable
+/root/init-support-user.sh # Execute script
+rm /root/init-support-user.sh # Delete the script from the VM after execution
